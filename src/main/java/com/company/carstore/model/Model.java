@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -62,5 +63,28 @@ public class Model implements Serializable {
 
     public void setSeries(String series) {
         this.series = series;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Model model = (Model) o;
+        return id == model.id && Objects.equals(brands, model.brands) && Objects.equals(name, model.name) && Objects.equals(series, model.series);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, brands, name, series);
+    }
+
+    @Override
+    public String toString() {
+        return "Model{" +
+                "id=" + id +
+                ", brands=" + brands +
+                ", name='" + name + '\'' +
+                ", series='" + series + '\'' +
+                '}';
     }
 }
