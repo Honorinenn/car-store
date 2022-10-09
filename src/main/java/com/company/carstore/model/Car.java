@@ -19,7 +19,6 @@ import java.util.Set;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "car")
 public class Car implements Serializable {
-}
 
     @Id
     @Column(name = "car_id")
@@ -38,3 +37,7 @@ public class Car implements Serializable {
     private LocalDate releaseDate;
     private int yearId;
     private BigDecimal listPrice;
+
+}
+
+   
