@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -60,7 +61,30 @@ public class CarType implements Serializable {
         return seat;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CarType carType = (CarType) o;
+        return id == carType.id && Objects.equals(brands, carType.brands) && Objects.equals(name, carType.name) && Objects.equals(seat, carType.seat);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, brands, name, seat);
+    }
+
     public void setSeat(Integer seat) {
         this.seat = seat;
+    }
+
+    @Override
+    public String toString() {
+        return "CarType{" +
+                "id=" + id +
+                ", brands=" + brands +
+                ", name='" + name + '\'' +
+                ", seat=" + seat +
+                '}';
     }
 }
