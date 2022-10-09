@@ -31,7 +31,7 @@ public class Brand implements Serializable {
     private Set<Model> models = new HashSet<>();
 
     private String title;
-    private int typeId;
+    private int carTypeId;
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -39,20 +39,20 @@ public class Brand implements Serializable {
     private int yearId;
     private BigDecimal listPrice;
 
-    public Brand(int id, Set<Model> models, String title, int typeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
+    public Brand(int id, Set<Model> models, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
         this.id = id;
         this.models = models;
         this.title = title;
-        this.typeId = typeId;
+        this.carTypeId = carTypeId;
         this.releaseDate = releaseDate;
         this.yearId = yearId;
         this.listPrice = listPrice;
     }
 
-    public Brand(Set<Model> models, String title, int typeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
+    public Brand(Set<Model> models, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
         this.models = models;
         this.title = title;
-        this.typeId = typeId;
+        this.carTypeId = carTypeId;
         this.releaseDate = releaseDate;
         this.yearId = yearId;
         this.listPrice = listPrice;
@@ -82,12 +82,12 @@ public class Brand implements Serializable {
         this.title = title;
     }
 
-    public int getBrandId() {
-        return typeId;
+    public int getCarTypeId() {
+        return carTypeId;
     }
 
-    public void setBrandId(int brandId) {
-        this.typeId = brandId;
+    public void setCarTypeId(int carTypeId) {
+        this.carTypeId = carTypeId;
     }
 
     public LocalDate getReleaseDate() {
@@ -118,22 +118,22 @@ public class Brand implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Brand car = (Brand) o;
-        return id == car.id && typeId == car.typeId && yearId == car.yearId && Objects.equals(models, car.models) && Objects.equals(title, car.title) && Objects.equals(releaseDate, car.releaseDate) && Objects.equals(listPrice, car.listPrice);
+        Brand brand = (Brand) o;
+        return id == brand.id && carTypeId == brand.carTypeId && yearId == brand.yearId && Objects.equals(models, brand.models) && Objects.equals(title, brand.title) && Objects.equals(releaseDate, brand.releaseDate) && Objects.equals(listPrice, brand.listPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, models, title, typeId, releaseDate, yearId, listPrice);
+        return Objects.hash(id, models, title, carTypeId, releaseDate, yearId, listPrice);
     }
 
     @Override
     public String toString() {
-        return "Car{" +
+        return "Brand{" +
                 "id=" + id +
                 ", models=" + models +
                 ", title='" + title + '\'' +
-                ", brandId=" + typeId +
+                ", carTypeId=" + carTypeId +
                 ", releaseDate=" + releaseDate +
                 ", yearId=" + yearId +
                 ", listPrice=" + listPrice +
