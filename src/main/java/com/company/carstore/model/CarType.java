@@ -25,6 +25,42 @@ public class CarType implements Serializable {
     private String name;
     private Integer seat;
 
+    public CarType(int id, Set<Brand> brands, String name, Integer seat) {
+        this.id = id;
+        this.brands = brands;
+        this.name = name;
+        this.seat = seat;
+    }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Set<Brand> getBrands() {
+        return brands;
+    }
+
+    public void setBrands(Set<Brand> brands) {
+        this.brands = brands;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Integer seat) {
+        this.seat = seat;
+    }
 }
