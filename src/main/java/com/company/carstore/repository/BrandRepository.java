@@ -1,4 +1,9 @@
 package com.company.carstore.repository;
 
-public interface BrandRepository {
+import com.company.carstore.model.Brand;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+@Repository
+public interface BrandRepository extends JpaRepository<Brand, Integer> {
 }
+
