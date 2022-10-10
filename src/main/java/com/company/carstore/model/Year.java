@@ -15,7 +15,7 @@ public class Year implements Serializable {
     @Column(name = "year_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String title;
+    private String name;
     private String series;
 
 
