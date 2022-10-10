@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -53,7 +54,25 @@ public class Year implements Serializable {
         this.series = series;
     }
 
-    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Year year = (Year) o;
+        return id == year.id && Objects.equals(name, year.name) && Objects.equals(series, year.series);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, series);
+    }
 
+    @Override
+    public String toString() {
+        return "Year{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", series='" + series + '\'' +
+                '}';
+    }
 }
