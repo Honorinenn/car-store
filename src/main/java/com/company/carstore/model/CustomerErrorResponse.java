@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class CustomerErrorResponse {
 
@@ -50,5 +51,28 @@ public class CustomerErrorResponse {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomerErrorResponse that = (CustomerErrorResponse) o;
+        return status == that.status && Objects.equals(errorMsg, that.errorMsg) && Objects.equals(errorCode, that.errorCode) && Objects.equals(timestamp, that.timestamp);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(errorMsg, status, errorCode, timestamp);
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerErrorResponse{" +
+                "errorMsg='" + errorMsg + '\'' +
+                ", status=" + status +
+                ", errorCode='" + errorCode + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }
