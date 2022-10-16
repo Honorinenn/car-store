@@ -11,11 +11,11 @@ import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "model")
-public class Model implements Serializable {
+@Table(name = "design")
+public class Design implements Serializable {
 
     @Id
-    @Column(name = "model_id")
+    @Column(name = "design_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -26,7 +26,7 @@ public class Model implements Serializable {
     private String name;
     private String series;
 
-    public Model(int id, Set<Brand> brands, String name, String series) {
+    public Design(int id, Set<Brand> brands, String name, String series) {
         this.id = id;
         this.brands = brands;
         this.name = name;
@@ -69,8 +69,8 @@ public class Model implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Model model = (Model) o;
-        return id == model.id && Objects.equals(brands, model.brands) && Objects.equals(name, model.name) && Objects.equals(series, model.series);
+        Design design = (Design) o;
+        return id == design.id && Objects.equals(brands, design.brands) && Objects.equals(name, design.name) && Objects.equals(series, design.series);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.company.carstore.viewmodel;
 
 
-import com.company.carstore.model.Model;
+import com.company.carstore.model.Design;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -23,5 +23,5 @@ public class BrandViewModel {
     private LocalDate releaseDate;
     private int yearId;
     private BigDecimal listPrice;
-    private List<Model> models = new ArrayList<>();
+    private List<Design> designs = new ArrayList<>();
 }

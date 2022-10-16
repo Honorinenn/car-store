@@ -28,7 +28,7 @@ public class Brand implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "brandId")
-    private Set<Model> models = new HashSet<>();
+    private Set<Design> designs = new HashSet<>();
 
     private String title;
     private int carTypeId;
@@ -39,9 +39,9 @@ public class Brand implements Serializable {
     private int yearId;
     private BigDecimal listPrice;
 
-    public Brand(int id, Set<Model> models, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
+    public Brand(int id, Set<Design> models, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
         this.id = id;
-        this.models = models;
+        this.designs = designs;
         this.title = title;
         this.carTypeId = carTypeId;
         this.releaseDate = releaseDate;
@@ -49,8 +49,8 @@ public class Brand implements Serializable {
         this.listPrice = listPrice;
     }
 
-    public Brand(Set<Model> models, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
-        this.models = models;
+    public Brand(Set<Design> models, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
+        this.designs = designs;
         this.title = title;
         this.carTypeId = carTypeId;
         this.releaseDate = releaseDate;
@@ -66,12 +66,12 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
-    public Set<Model> getModels() {
-        return models;
+    public Set<Design> getDesigns() {
+        return designs;
     }
 
-    public void setModels(Set<Model> models) {
-        this.models = models;
+    public void setDesigns(Set<Design> designs) {
+        this.designs = designs;
     }
 
     public String getTitle() {
@@ -119,19 +119,19 @@ public class Brand implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Brand brand = (Brand) o;
-        return id == brand.id && carTypeId == brand.carTypeId && yearId == brand.yearId && Objects.equals(models, brand.models) && Objects.equals(title, brand.title) && Objects.equals(releaseDate, brand.releaseDate) && Objects.equals(listPrice, brand.listPrice);
+        return id == brand.id && carTypeId == brand.carTypeId && yearId == brand.yearId && Objects.equals(designs, brand.designs) && Objects.equals(title, brand.title) && Objects.equals(releaseDate, brand.releaseDate) && Objects.equals(listPrice, brand.listPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, models, title, carTypeId, releaseDate, yearId, listPrice);
+        return Objects.hash(id, designs, title, carTypeId, releaseDate, yearId, listPrice);
     }
 
     @Override
     public String toString() {
         return "Brand{" +
                 "id=" + id +
-                ", models=" + models +
+                ", designs=" + designs +
                 ", title='" + title + '\'' +
                 ", carTypeId=" + carTypeId +
                 ", releaseDate=" + releaseDate +
