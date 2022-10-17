@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrandViewModel {
-
+    private int id;
     private String title;
     private int carTypeId;
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -25,7 +25,8 @@ public class BrandViewModel {
     private BigDecimal listPrice;
     private List<Design> designs = new ArrayList<>();
 
-    public BrandViewModel(String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice, List<Design> designs) {
+    public BrandViewModel(int id, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice, List<Design> designs) {
+        this.id = id;
         this.title = title;
         this.carTypeId = carTypeId;
         this.releaseDate = releaseDate;
