@@ -1,7 +1,9 @@
 package com.company.carstore.viewmodel;
 
 
+import com.company.carstore.model.CarType;
 import com.company.carstore.model.Design;
+import com.company.carstore.model.Year;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -17,30 +19,30 @@ import java.util.Objects;
 public class BrandViewModel {
     private int id;
     private String title;
-    private int carTypeId;
+    private CarType carType;
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate releaseDate;
-    private int yearId;
+    private Year year;
     private BigDecimal listPrice;
     private List<Design> designs = new ArrayList<>();
 
-    public BrandViewModel(int id, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice, List<Design> designs) {
+    public BrandViewModel(int id, String title, CarType carType, LocalDate releaseDate, Year year, BigDecimal listPrice, List<Design> designs) {
         this.id = id;
         this.title = title;
-        this.carTypeId = carTypeId;
+        this.carType = carType;
         this.releaseDate = releaseDate;
-        this.yearId = yearId;
+        this.year = year;
         this.listPrice = listPrice;
         this.designs = designs;
     }
 
-    public BrandViewModel(String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice, List<Design> designs) {
+    public BrandViewModel(String title, CarType carType, LocalDate releaseDate, Year year, BigDecimal listPrice, List<Design> designs) {
         this.title = title;
-        this.carTypeId = carTypeId;
+        this.carType = carType;
         this.releaseDate = releaseDate;
-        this.yearId = yearId;
+        this.year = year;
         this.listPrice = listPrice;
         this.designs = designs;
     }
@@ -61,12 +63,12 @@ public class BrandViewModel {
         this.title = title;
     }
 
-    public int getCarTypeId() {
-        return carTypeId;
+    public CarType getCarType() {
+        return carType;
     }
 
-    public void setCarTypeId(int carTypeId) {
-        this.carTypeId = carTypeId;
+    public void setCarType(CarType carType) {
+        this.carType = carType;
     }
 
     public LocalDate getReleaseDate() {
@@ -77,12 +79,12 @@ public class BrandViewModel {
         this.releaseDate = releaseDate;
     }
 
-    public int getYearId() {
-        return yearId;
+    public Year getYear() {
+        return year;
     }
 
-    public void setYearId(int yearId) {
-        this.yearId = yearId;
+    public void setYear(Year year) {
+        this.year = year;
     }
 
     public BigDecimal getListPrice() {
@@ -106,12 +108,12 @@ public class BrandViewModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BrandViewModel that = (BrandViewModel) o;
-        return id == that.id && carTypeId == that.carTypeId && yearId == that.yearId && Objects.equals(title, that.title) && Objects.equals(releaseDate, that.releaseDate) && Objects.equals(listPrice, that.listPrice) && Objects.equals(designs, that.designs);
+        return id == that.id && Objects.equals(title, that.title) && Objects.equals(carType, that.carType) && Objects.equals(releaseDate, that.releaseDate) && Objects.equals(year, that.year) && Objects.equals(listPrice, that.listPrice) && Objects.equals(designs, that.designs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, carTypeId, releaseDate, yearId, listPrice, designs);
+        return Objects.hash(id, title, carType, releaseDate, year, listPrice, designs);
     }
 
     @Override
@@ -119,9 +121,9 @@ public class BrandViewModel {
         return "BrandViewModel{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", carTypeId=" + carTypeId +
+                ", carType=" + carType +
                 ", releaseDate=" + releaseDate +
-                ", yearId=" + yearId +
+                ", year=" + year +
                 ", listPrice=" + listPrice +
                 ", designs=" + designs +
                 '}';
