@@ -24,4 +24,13 @@ public class BrandViewModel {
     private int yearId;
     private BigDecimal listPrice;
     private List<Design> designs = new ArrayList<>();
+
+    public BrandViewModel(String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice, List<Design> designs) {
+        this.title = title;
+        this.carTypeId = carTypeId;
+        this.releaseDate = releaseDate;
+        this.yearId = yearId;
+        this.listPrice = listPrice;
+        this.designs = designs;
+    }
 }
