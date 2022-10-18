@@ -16,16 +16,19 @@ public class Year implements Serializable {
     @Column(name = "year_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private int brandId;
     private String name;
     private String series;
 
-    public Year(int id, String name, String series) {
+    public Year(int id, int brandId, String name, String series) {
         this.id = id;
+        this.brandId = brandId;
         this.name = name;
         this.series = series;
     }
 
-    public Year(String name, String series) {
+    public Year(int brandId, String name, String series) {
+        this.brandId = brandId;
         this.name = name;
         this.series = series;
     }
@@ -36,6 +39,14 @@ public class Year implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
     }
 
     public String getName() {
@@ -59,18 +70,19 @@ public class Year implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Year year = (Year) o;
-        return id == year.id && Objects.equals(name, year.name) && Objects.equals(series, year.series);
+        return id == year.id && brandId == year.brandId && Objects.equals(name, year.name) && Objects.equals(series, year.series);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, series);
+        return Objects.hash(id, brandId, name, series);
     }
 
     @Override
     public String toString() {
         return "Year{" +
                 "id=" + id +
+                ", brandId=" + brandId +
                 ", name='" + name + '\'' +
                 ", series='" + series + '\'' +
                 '}';

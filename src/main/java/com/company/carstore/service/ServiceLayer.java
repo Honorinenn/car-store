@@ -1,6 +1,7 @@
 package com.company.carstore.service;
 
 import com.company.carstore.model.Brand;
+import com.company.carstore.model.Year;
 import com.company.carstore.repository.BrandRepository;
 import com.company.carstore.repository.CarTypeRepository;
 import com.company.carstore.repository.DesignRepository;
@@ -9,6 +10,8 @@ import com.company.carstore.viewmodel.BrandViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Component
 public class ServiceLayer {
@@ -35,9 +38,24 @@ public class ServiceLayer {
         b.setReleaseDate(viewModel.getReleaseDate());
         b.setListPrice(viewModel.getListPrice());
         b.setCarTypeId(viewModel.getCarType().getId());
-        b.setArtistId(viewModel.getArtist().getId());
-        a = albumRepository.save(a);
-        viewModel.setId(a.getId());
+        b.setYearId(viewModel.getYear().getId());
+        b = brandRepository.save(b);
+        viewModel.setId(b.getId());
+
+        // Add Brand Id to Track and Persist Tracks
+        List<Year> years = viewModel.getYears();
+
+        years.stream()
+                .forEach(t ->
+                {
+                    t.setBrandId(viewModel.getId());
+                    yearRepository.save(t);
+                });
+
+        years = yearRepository.findAllYearsByBrandId(viewModel.getId());
+        viewModel.setYears(years);
+
+        return viewModel
     }
 
 
