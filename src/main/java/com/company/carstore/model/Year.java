@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -16,21 +18,25 @@ public class Year implements Serializable {
     @Column(name = "year_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int brandId;
-    private String name;
-    private String series;
 
-    public Year(int id, int brandId, String name, String series) {
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "yearId")
+    private Set<Brand> brands = new HashSet<>();
+
+    private String name;
+
+    public Year(int id, Set<Brand> brands, String name) {
         this.id = id;
-        this.brandId = brandId;
+        this.brands = brands;
         this.name = name;
-        this.series = series;
     }
 
-    public Year(int brandId, String name, String series) {
-        this.brandId = brandId;
+    public Year() {
+    }
+
+    public Year(Set<Brand> brands, String name) {
+        this.brands = brands;
         this.name = name;
-        this.series = series;
     }
 
     public int getId() {
@@ -41,12 +47,12 @@ public class Year implements Serializable {
         this.id = id;
     }
 
-    public int getBrandId() {
-        return brandId;
+    public Set<Brand> getBrands() {
+        return brands;
     }
 
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
+    public void setBrands(Set<Brand> brands) {
+        this.brands = brands;
     }
 
     public String getName() {
@@ -57,34 +63,25 @@ public class Year implements Serializable {
         this.name = name;
     }
 
-    public String getSeries() {
-        return series;
-    }
-
-    public void setSeries(String series) {
-        this.series = series;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Year year = (Year) o;
-        return id == year.id && brandId == year.brandId && Objects.equals(name, year.name) && Objects.equals(series, year.series);
+        return id == year.id && Objects.equals(brands, year.brands) && Objects.equals(name, year.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, brandId, name, series);
+        return Objects.hash(id, brands, name);
     }
 
     @Override
     public String toString() {
         return "Year{" +
                 "id=" + id +
-                ", brandId=" + brandId +
+                ", brands=" + brands +
                 ", name='" + name + '\'' +
-                ", series='" + series + '\'' +
                 '}';
     }
 }
