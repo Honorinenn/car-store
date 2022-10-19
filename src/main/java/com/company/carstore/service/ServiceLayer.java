@@ -138,7 +138,19 @@ public class ServiceLayer {
                 });
     }
 
+    @Transactional
+    public void removeBrand(int id) {
 
+        // Remove all associated designs first
+        List<Design> designList = designRepository.findAllDesignsByBrandId(id);
+
+        designList.stream()
+                .forEach(design -> designRepository.deleteById(design.getId()));
+
+        // Remove brand
+        brandRepository.deleteById(id);
+
+    }
 }
 
 
