@@ -26,4 +26,13 @@ public class BrandController {
         return serviceLayer.saveBrand(brandViewModel);
     }
 
+    @RequestMapping(value="/car/{id}", method=RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public BrandViewModel getBrandById(@PathVariable int id) {
+        BrandViewModel bvm = serviceLayer.findBrand(id);
+        if (bvm == null) {
+            throw new NoRecordFoundException("Brand id " + id + " not found.");
+        }
+        return serviceLayer.findBrand(id);
+    }
 }
