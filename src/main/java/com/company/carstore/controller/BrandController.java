@@ -47,4 +47,10 @@ public class BrandController {
         }
         serviceLayer.updateBrand(bvm);
     }
+
+    @RequestMapping(value="/car/{id}", method=RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBrand(@PathVariable int id) {
+        serviceLayer.removeBrand(id);
+    }
 }
