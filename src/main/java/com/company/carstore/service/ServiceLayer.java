@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -94,6 +95,19 @@ public class ServiceLayer {
         return bvm;
     }
 
+    public List<BrandViewModel> findAllBrands() {
+
+        List<Brand> brandList = brandRepository.findAll();
+
+        List<BrandViewModel> bvmList = new ArrayList<>();
+
+        for (Brand brand : brandList) {
+            BrandViewModel bvm = buildBrandViewModel(brand);
+            bvmList.add(bvm);
+        }
+
+        return bvmList;
+    }
 
 
 
