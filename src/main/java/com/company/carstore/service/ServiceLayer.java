@@ -1,6 +1,7 @@
 package com.company.carstore.service;
 
 import com.company.carstore.model.Brand;
+import com.company.carstore.model.Design;
 import com.company.carstore.model.Year;
 import com.company.carstore.repository.BrandRepository;
 import com.company.carstore.repository.CarTypeRepository;
@@ -38,18 +39,18 @@ public class ServiceLayer {
         b.setReleaseDate(viewModel.getReleaseDate());
         b.setListPrice(viewModel.getListPrice());
         b.setCarTypeId(viewModel.getCarType().getId());
-        b.setYearId(viewModel.getYear().getId());
+        b.setDesignId(viewModel.getYear().getId());
         b = brandRepository.save(b);
         viewModel.setId(b.getId());
 
-        // Add Brand Id to Track and Persist Tracks
-        List<Year> years = viewModel.getYears();
+        // Add Brand Id to Design and Persist Designs
+        List<Design> designs = viewModel.getDesigns();
 
-        years.stream()
+        designs.stream()
                 .forEach(t ->
                 {
                     t.setBrandId(viewModel.getId());
-                    yearRepository.save(t);
+                    designRepository.save(t);
                 });
 
         years = yearRepository.findAllYearsByBrandId(viewModel.getId());
@@ -61,3 +62,28 @@ public class ServiceLayer {
 
 
 }
+
+
+//    Album a = new Album();
+//        a.setTitle(viewModel.getTitle());
+//                a.setReleaseDate(viewModel.getReleaseDate());
+//                a.setListPrice(viewModel.getListPrice());
+//                a.setLabelId(viewModel.getLabel().getId());
+//                a.setArtistId(viewModel.getArtist().getId());
+//                a = albumRepository.save(a);
+//                viewModel.setId(a.getId());
+//
+//                // Add Album Id to Tracks and Persist Tracks
+//                List<Track> tracks = viewModel.getTracks();
+//
+//        tracks.stream()
+//        .forEach(t ->
+//        {
+//        t.setAlbumId(viewModel.getId());
+//        trackRepository.save(t);
+//        });
+//
+//        tracks = trackRepository.findAllTracksByAlbumId(viewModel.getId());
+//        viewModel.setTracks(tracks);
+//
+//        return viewModel;

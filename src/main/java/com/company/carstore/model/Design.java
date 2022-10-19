@@ -18,73 +18,30 @@ public class Design implements Serializable {
     @Column(name = "design_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "labelId")
-    private Set<Brand> brands = new HashSet<>();
-
+    private int brandId;
     private String name;
-    private String series;
+    private int series;
 
-    public Design(int id, Set<Brand> brands, String name, String series) {
+    public Design(int id, int brandId, String name, int series) {
         this.id = id;
-        this.brands = brands;
+        this.brandId = brandId;
         this.name = name;
         this.series = series;
     }
 
-    public int getId() {
-        return id;
+    public Design() {
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Set<Brand> getBrands() {
-        return brands;
-    }
-
-    public void setBrands(Set<Brand> brands) {
-        this.brands = brands;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Design(int brandId, String name, int series) {
+        this.brandId = brandId;
         this.name = name;
-    }
-
-    public String getSeries() {
-        return series;
-    }
-
-    public void setSeries(String series) {
         this.series = series;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Design design = (Design) o;
-        return id == design.id && Objects.equals(brands, design.brands) && Objects.equals(name, design.name) && Objects.equals(series, design.series);
+    public Design(String name, int series) {
+        this.name = name;
+        this.series = series;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, brands, name, series);
-    }
-
-    @Override
-    public String toString() {
-        return "Model{" +
-                "id=" + id +
-                ", brands=" + brands +
-                ", name='" + name + '\'' +
-                ", series='" + series + '\'' +
-                '}';
-    }
+    
 }
