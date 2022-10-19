@@ -35,4 +35,16 @@ public class BrandController {
         }
         return serviceLayer.findBrand(id);
     }
+
+    @RequestMapping(value="/car/{id}", method=RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateBrand(@PathVariable int id, @RequestBody BrandViewModel bvm) {
+        if (bvm.getId() == 0) {
+            bvm.setId(id);
+        }
+        if (bvm.getId() != id) {
+            throw new InvalidRequestException("id in request body must match id in path");
+        }
+        serviceLayer.updateBrand(bvm);
+    }
 }
