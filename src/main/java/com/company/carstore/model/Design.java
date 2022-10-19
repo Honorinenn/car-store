@@ -43,5 +43,58 @@ public class Design implements Serializable {
         this.series = series;
     }
 
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSeries() {
+        return series;
+    }
+
+    public void setSeries(int series) {
+        this.series = series;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Design design = (Design) o;
+        return id == design.id && brandId == design.brandId && series == design.series && Objects.equals(name, design.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, brandId, name, series);
+    }
+
+    @Override
+    public String toString() {
+        return "Design{" +
+                "id=" + id +
+                ", brandId=" + brandId +
+                ", name='" + name + '\'' +
+                ", series=" + series +
+                '}';
+    }
 }
