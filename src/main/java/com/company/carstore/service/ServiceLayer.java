@@ -1,6 +1,7 @@
 package com.company.carstore.service;
 
 import com.company.carstore.model.Brand;
+import com.company.carstore.model.CarType;
 import com.company.carstore.model.Design;
 import com.company.carstore.model.Year;
 import com.company.carstore.repository.BrandRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ServiceLayer {
@@ -58,6 +60,40 @@ public class ServiceLayer {
 
         return viewModel;
     }
+
+    public BrandViewModel findBrand(int id) {
+
+        // Get the album object first
+        Optional<Brand> brand = brandRepository.findById(id);
+
+        return brand.isPresent() ? buildBrandViewModel(brand.get()) : null;
+    }
+
+    private BrandViewModel buildBrandViewModel(Brand brand) {
+
+        // Get the associated carType
+        Optional<CarType> carType = carTypeRepository.findById(brand.getCarTypeId());
+
+        // Get the associated year
+        Optional<Year> year = yearRepository.findById(brand.getYearId());
+
+        // Get the designs associated with the brand
+        List<Design> designList = designRepository.findAllDesignsByBrandId(brand.getId());
+
+        // Assemble the BrandViewModel
+        BrandViewModel bvm = new BrandViewModel();
+        bvm.setId(brand.getId());
+        bvm.setTitle(brand.getTitle());
+        bvm.setReleaseDate(brand.getReleaseDate());
+        bvm.setListPrice(brand.getListPrice());
+        bvm.setCarType(carType.get());
+        bvm.setYear(year.get());
+        bvm.setDesigns(designList);
+
+        // Return the BrandViewModel
+        return bvm;
+    }
+
 
 
 

@@ -47,6 +47,9 @@ public class BrandViewModel {
         this.designs = designs;
     }
 
+    public BrandViewModel() {
+    }
+
     public int getId() {
         return id;
     }
