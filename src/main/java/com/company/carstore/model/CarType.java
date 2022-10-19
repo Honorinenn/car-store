@@ -20,7 +20,7 @@ public class CarType implements Serializable {
     private int id;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "artistId")
+    @JoinColumn(name = "carTypeId")
     private Set<Brand> brands = new HashSet<>();
 
     private String name;

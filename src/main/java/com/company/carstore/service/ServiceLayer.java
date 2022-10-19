@@ -151,6 +151,36 @@ public class ServiceLayer {
         brandRepository.deleteById(id);
 
     }
+
+    //
+    // Artist API
+    //
+
+    public CarType saveCarType(CarType carType) {
+
+        return carTypeRepository.save(carType);
+    }
+
+    public CarType findCarType(int id) {
+
+        Optional<CarType> carType = carTypeRepository.findById(id);
+        return carType.isPresent() ? carType.get() : null;
+    }
+
+    public List<CarType> findAllArtists() {
+
+        return carTypeRepository.findAll();
+    }
+
+    public void updateCarType(CarType carType) {
+
+        carTypeRepository.save(carType);
+    }
+
+    public void removeCarType(int id) {
+
+        carTypeRepository.deleteById(id);
+    }
 }
 
 
