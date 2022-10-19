@@ -110,6 +110,34 @@ public class ServiceLayer {
     }
 
 
+    @Transactional
+    public void updateBrand(BrandViewModel viewModel) {
+
+        // Update the brand information
+        Brand brand = new Brand();
+        brand.setId(viewModel.getId());
+        brand.setCarTypeId(viewModel.getCarType().getId());
+        brand.setYearId(viewModel.getYear().getId());
+        brand.setListPrice(viewModel.getListPrice());
+        brand.setReleaseDate(viewModel.getReleaseDate());
+
+        brandRepository.save(brand);
+
+        // We don't know if any design have been removed so delete all associated designs
+        // and then associate the designs in the viewModel with the brand
+        List<Design> designList = designRepository.findAllDesignsByBrandId(brand.getId());
+        designList.stream()
+                .forEach(design -> designRepository.deleteById(design.getId()));
+
+        List<Design> designs = viewModel.getDesigns();
+        designs.stream()
+                .forEach(t ->
+                {
+                    t.setBrandId(viewModel.getId());
+                    t = designRepository.save(t);
+                });
+    }
+
 
 }
 
