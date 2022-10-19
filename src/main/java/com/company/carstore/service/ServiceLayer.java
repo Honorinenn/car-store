@@ -39,7 +39,7 @@ public class ServiceLayer {
         b.setReleaseDate(viewModel.getReleaseDate());
         b.setListPrice(viewModel.getListPrice());
         b.setCarTypeId(viewModel.getCarType().getId());
-        b.setDesignId(viewModel.getYear().getId());
+        b.setYearId(viewModel.getYear().getId());
         b = brandRepository.save(b);
         viewModel.setId(b.getId());
 
@@ -53,10 +53,10 @@ public class ServiceLayer {
                     designRepository.save(t);
                 });
 
-        years = yearRepository.findAllYearsByBrandId(viewModel.getId());
-        viewModel.setYears(years);
+        designs = designRepository.findAllDesignsByBrandId(viewModel.getId());
+        viewModel.setDesigns(designs);
 
-        return viewModel
+        return viewModel;
     }
 
 

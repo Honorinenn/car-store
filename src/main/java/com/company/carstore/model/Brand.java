@@ -58,6 +58,10 @@ public class Brand implements Serializable {
         this.listPrice = listPrice;
     }
 
+    public Brand() {
+
+    }
+
     public int getId() {
         return id;
     }
