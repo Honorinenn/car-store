@@ -153,7 +153,7 @@ public class ServiceLayer {
     }
 
     //
-    // Artist API
+    // CarType API
     //
 
     public CarType saveCarType(CarType carType) {
@@ -180,6 +180,36 @@ public class ServiceLayer {
     public void removeCarType(int id) {
 
         carTypeRepository.deleteById(id);
+    }
+
+    //
+    // Year API
+    //
+
+    public Year saveYear(Year year) {
+
+        return yearRepository.save(year);
+    }
+
+    public Year findYear(int id) {
+
+        Optional<Year> year = yearRepository.findById(id);
+        return year.isPresent() ? year.get() : null;
+    }
+
+    public List<Year> findAllYears() {
+
+        return yearRepository.findAll();
+    }
+
+    public void updateYear(Year year) {
+
+        yearRepository.save(year);
+    }
+
+    public void removeYear(int id) {
+
+        yearRepository.deleteById(id);
     }
 }
 
