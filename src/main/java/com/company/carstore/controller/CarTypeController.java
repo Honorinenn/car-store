@@ -50,5 +50,11 @@ public class CarTypeController {
         serviceLayer.updateCarType(carType);
     }
 
+    @RequestMapping(value="/carType/{id}", method=RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCarType(@PathVariable int id) {
+        serviceLayer.removeCarType(id);
+    }
+
 
 }
