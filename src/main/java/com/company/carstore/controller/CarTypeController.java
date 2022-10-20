@@ -1,6 +1,7 @@
 package com.company.carstore.controller;
 
 
+import com.company.carstore.exception.InvalidRequestException;
 import com.company.carstore.exception.NoRecordFoundException;
 import com.company.carstore.model.CarType;
 import com.company.carstore.service.ServiceLayer;
@@ -37,6 +38,17 @@ public class CarTypeController {
         return carType;
     }
 
+    @RequestMapping(value="/carType/{id}", method=RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateCarType(@PathVariable int id, @RequestBody CarType carType) {
+        if (carType.getId() == 0) {
+            carType.setId(id);
+        }
+        if (carType.getId() != id) {
+            throw new InvalidRequestException("id in request body must match id in path");
+        }
+        serviceLayer.updateCarType(carType);
+    }
 
 
 }
