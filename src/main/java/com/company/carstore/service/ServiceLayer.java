@@ -167,7 +167,7 @@ public class ServiceLayer {
         return carType.isPresent() ? carType.get() : null;
     }
 
-    public List<CarType> findAllArtists() {
+    public List<CarType> findAllCarTypes() {
 
         return carTypeRepository.findAll();
     }
