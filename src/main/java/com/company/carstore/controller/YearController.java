@@ -1,6 +1,7 @@
 package com.company.carstore.controller;
 
 
+import com.company.carstore.exception.InvalidRequestException;
 import com.company.carstore.exception.NoRecordFoundException;
 import com.company.carstore.model.Year;
 import com.company.carstore.service.ServiceLayer;
@@ -37,4 +38,23 @@ public class YearController {
         }
         return year;
     }
+
+    @RequestMapping(value="/year/{id}", method=RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateYear(@PathVariable int id, @RequestBody Year year) {
+        if (year.getId() == 0) {
+            year.setId(id);
+        }
+        if (year.getId() != id) {
+            throw new InvalidRequestException("id in request body must match id in path");
+        }
+        serviceLayer.updateYear(year);
+    }
+
+    @RequestMapping(value="/year/{id}", method=RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteYear(@PathVariable int id) {
+        serviceLayer.removeYear(id);
+    }
+
 }
