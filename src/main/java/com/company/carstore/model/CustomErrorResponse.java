@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class CustomerErrorResponse {
+public class CustomErrorResponse {
 
     String errorMsg;
     int status;
@@ -14,7 +14,7 @@ public class CustomerErrorResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     LocalDateTime  timestamp;
 
-    public CustomerErrorResponse(String errorMsg, HttpStatus httpStatus) {
+    public CustomErrorResponse(String errorMsg, HttpStatus httpStatus) {
         this.errorMsg = errorMsg;
         this.status = httpStatus.value();
         this.errorCode = httpStatus.toString();
@@ -57,7 +57,7 @@ public class CustomerErrorResponse {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CustomerErrorResponse that = (CustomerErrorResponse) o;
+        CustomErrorResponse that = (CustomErrorResponse) o;
         return status == that.status && Objects.equals(errorMsg, that.errorMsg) && Objects.equals(errorCode, that.errorCode) && Objects.equals(timestamp, that.timestamp);
     }
 
