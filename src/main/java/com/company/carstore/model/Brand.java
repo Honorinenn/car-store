@@ -39,7 +39,7 @@ public class Brand implements Serializable {
     private int yearId;
     private BigDecimal listPrice;
 
-    public Brand(int id, Set<Design> models, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
+    public Brand(int id, Set<Design> designs, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
         this.id = id;
         this.designs = designs;
         this.title = title;
@@ -49,7 +49,7 @@ public class Brand implements Serializable {
         this.listPrice = listPrice;
     }
 
-    public Brand(Set<Design> models, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
+    public Brand(Set<Design> designs, String title, int carTypeId, LocalDate releaseDate, int yearId, BigDecimal listPrice) {
         this.designs = designs;
         this.title = title;
         this.carTypeId = carTypeId;
@@ -59,7 +59,6 @@ public class Brand implements Serializable {
     }
 
     public Brand() {
-
     }
 
     public int getId() {

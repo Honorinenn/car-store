@@ -36,7 +36,7 @@ public class ServiceLayer {
     @Transactional
     public BrandViewModel saveBrand(BrandViewModel viewModel) {
 
-        // Persist Album
+        // Persist Brand
         Brand b = new Brand();
         b.setTitle(viewModel.getTitle());
         b.setReleaseDate(viewModel.getReleaseDate());
@@ -64,7 +64,7 @@ public class ServiceLayer {
 
     public BrandViewModel findBrand(int id) {
 
-        // Get the album object first
+        // Get the brand object first
         Optional<Brand> brand = brandRepository.findById(id);
 
         return brand.isPresent() ? buildBrandViewModel(brand.get()) : null;
