@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -78,5 +78,53 @@ public class BrandControllerTest {
                 .andExpect(content().json(outputBrandViewModelString));
     }
 
+    @Test
+    public void shouldGetAllBrands() throws Exception {
+        mockMvc.perform(get("/car"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(allBrandViewModelsString));
+    }
 
+    @Test
+    public void shouldGetBrandById() throws Exception {
+        mockMvc.perform(get("/car/" + brandId))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(outputBrandViewModelString));
+    }
+
+    @Test
+    public void shouldReport404WhenFindBrandByInvalidId() throws Exception {
+        mockMvc.perform(get("/car/" + nonExistentBrandId))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void shouldUpdateBrand() throws Exception {
+        mockMvc.perform(put("/car/" + brandId)
+                        .content(outputBrandViewModelString)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    public void shouldBeUnprocessableEntityWhenPutRequestContainsNonMatchingIds() throws Exception {
+        mockMvc.perform(put("/car/" + nonExistentBrandId)
+                        .content(outputBrandViewModelString)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void shouldDeleteCarType() throws Exception {
+        mockMvc.perform(delete("/car/" + brandId))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+    }
+
+    
 }
