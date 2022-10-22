@@ -25,17 +25,16 @@ public class Year implements Serializable {
 
     private String name;
 
-    public Year(int id, Set<Brand> brands, String name) {
+    public Year(int id, String name) {
         this.id = id;
-        this.brands = brands;
         this.name = name;
     }
 
     public Year() {
     }
 
-    public Year(Set<Brand> brands, String name) {
-        this.brands = brands;
+    public Year(String name) {
+
         this.name = name;
     }
 
@@ -45,14 +44,6 @@ public class Year implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Set<Brand> getBrands() {
-        return brands;
-    }
-
-    public void setBrands(Set<Brand> brands) {
-        this.brands = brands;
     }
 
     public String getName() {
@@ -68,19 +59,18 @@ public class Year implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Year year = (Year) o;
-        return id == year.id && Objects.equals(brands, year.brands) && Objects.equals(name, year.name);
+        return id == year.id && Objects.equals(name, year.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, brands, name);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
         return "Year{" +
                 "id=" + id +
-                ", brands=" + brands +
                 ", name='" + name + '\'' +
                 '}';
     }

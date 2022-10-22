@@ -26,15 +26,13 @@ public class CarType implements Serializable {
     private String name;
     private Integer seat;
 
-    public CarType(int id, Set<Brand> brands, String name, Integer seat) {
+    public CarType(int id, String name, Integer seat) {
         this.id = id;
-        this.brands = brands;
         this.name = name;
         this.seat = seat;
     }
 
-    public CarType(Set<Brand> brands, String name, Integer seat) {
-        this.brands = brands;
+    public CarType(String name, Integer seat) {
         this.name = name;
         this.seat = seat;
     }
@@ -50,14 +48,6 @@ public class CarType implements Serializable {
         this.id = id;
     }
 
-    public Set<Brand> getBrands() {
-        return brands;
-    }
-
-    public void setBrands(Set<Brand> brands) {
-        this.brands = brands;
-    }
-
     public String getName() {
         return name;
     }
@@ -70,28 +60,27 @@ public class CarType implements Serializable {
         return seat;
     }
 
+    public void setSeat(Integer seat) {
+        this.seat = seat;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CarType carType = (CarType) o;
-        return id == carType.id && Objects.equals(brands, carType.brands) && Objects.equals(name, carType.name) && Objects.equals(seat, carType.seat);
+        return id == carType.id && Objects.equals(name, carType.name) && Objects.equals(seat, carType.seat);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, brands, name, seat);
-    }
-
-    public void setSeat(Integer seat) {
-        this.seat = seat;
+        return Objects.hash(id, name, seat);
     }
 
     @Override
     public String toString() {
         return "CarType{" +
                 "id=" + id +
-                ", brands=" + brands +
                 ", name='" + name + '\'' +
                 ", seat=" + seat +
                 '}';

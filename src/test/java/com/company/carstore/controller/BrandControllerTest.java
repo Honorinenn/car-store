@@ -1,14 +1,26 @@
 package com.company.carstore.controller;
 
+import com.company.carstore.model.CarType;
+import com.company.carstore.model.Design;
+import com.company.carstore.model.Year;
 import com.company.carstore.service.ServiceLayer;
 import com.company.carstore.viewmodel.BrandViewModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import sun.security.krb5.internal.crypto.Des;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
+
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(BrandController.class)
@@ -27,5 +39,28 @@ public class BrandControllerTest {
     private int nonExistentBrandId = 601;
 
     private ObjectMapper mapper = new ObjectMapper();
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Before
+    public void setUp() throws Exception {
+        CarType inputCarType = new CarType(25, "@watchSZ", 4);
+        Year inputYear = new Year(9,"www.goodonyasmusic.net");
+        List<Design> inputDesigns = Arrays.asList(new Design("Songsville", 200));
+        inputBrandViewModel = new BrandViewModel("My Album", inputCarType, LocalDate.of(2022, 05, 18), inputYear, new BigDecimal("10.95"), inputDesigns);
+
+        List<Design> outputDesigns = Arrays.asList(new Design(831, "Songsville", 200));
+        outputBrandViewModel = new BrandViewModel(brandId, "My Album", inputCarType, LocalDate.of(2022, 05, 18), inputYear, new BigDecimal("10.95"), outputDesigns);
+        inputBrandViewModelString = mapper.writeValueAsString(inputBrandViewModel);
+        outputBrandViewModelString = mapper.writeValueAsString(outputBrandViewModel);
+        allBrandViewModels = Arrays.asList(outputBrandViewModel);
+        allBrandViewModelsString = mapper.writeValueAsString(allBrandViewModels);
+
+        when(serviceLayer.saveBrand(inputBrandViewModel)).thenReturn(outputBrandViewModel);
+        when(serviceLayer.findAllBrands()).thenReturn(allBrandViewModels);
+        when(serviceLayer.findBrand(brandId)).thenReturn(outputBrandViewModel);
+    }
+
 
 }
