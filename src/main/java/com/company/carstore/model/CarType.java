@@ -40,6 +40,8 @@ public class CarType implements Serializable {
     public CarType() {
     }
 
+
+
     public int getId() {
         return id;
     }
