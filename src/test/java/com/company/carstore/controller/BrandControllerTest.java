@@ -126,5 +126,5 @@ public class BrandControllerTest {
                 .andExpect(status().isNoContent());
     }
 
-    
+
 }
