@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -61,6 +62,25 @@ public class CarTypeRepositoryTest {
         assertEquals(carType1.get(), carType);
     }
 
+    @Test
+    public void getAllCarTypes() {
+
+        CarType carType = new CarType();
+        carType.setName("Rock Star");
+        carType.setSeat(4);
+
+        carType = carTypeRepository.save(carType);
+
+        carType = new CarType();
+        carType.setName("Super Star");
+        carType.setSeat(4);
+
+        carType = carTypeRepository.save(carType);
+
+        List<CarType> aList = carTypeRepository.findAll();
+        assertEquals(aList.size(), 2);
+
+    }
 
 
 }
