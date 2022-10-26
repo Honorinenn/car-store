@@ -66,9 +66,9 @@ public class YearRepositoryTest {
 
         yearRepository.save(year);
 
-        List<Year> lList = yearRepository.findAll();
+        List<Year> yList = yearRepository.findAll();
 
-        assertEquals(lList.size(), 2);
+        assertEquals(yList.size(), 2);
 
     }
 
