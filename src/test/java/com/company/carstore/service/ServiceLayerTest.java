@@ -8,7 +8,9 @@ import com.company.carstore.repository.BrandRepository;
 import com.company.carstore.repository.CarTypeRepository;
 import com.company.carstore.repository.DesignRepository;
 import com.company.carstore.repository.YearRepository;
+import com.company.carstore.viewmodel.BrandViewModel;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
@@ -121,5 +125,101 @@ public class ServiceLayerTest {
         doReturn(dList).when(designRepository).findAllDesignsByBrandId(1);
     }
 
+    @Test
+    public void findAllBrands() {
+        List<BrandViewModel> fromService = service.findAllBrands();
+
+        assertEquals(1, fromService.size());
+    }
+
+    @Test
+    public void shouldSaveCarType() {
+        CarType carTypeToSave = new CarType();
+        carTypeToSave.setSeat(4);
+        carTypeToSave.setName("The GOAT");
+
+        CarType expectedCarType = new CarType();
+        expectedCarType.setSeat(4);
+        expectedCarType.setName("The GOAT");
+        expectedCarType.setId(45);
+
+        CarType actualResult = service.saveCarType(carTypeToSave);
+
+        assertEquals(expectedCarType, actualResult);
+    }
+
+    @Test
+    public void shouldFindBrandAndBuildViewModelCorrectly() {
+        BrandViewModel whatIExpect = new BrandViewModel();
+
+        whatIExpect.setListPrice(new BigDecimal("14.99"));
+        whatIExpect.setReleaseDate(LocalDate.of(1999, 05, 15));
+        whatIExpect.setTitle("Greatest Hits");
+        whatIExpect.setId(1);
+
+        CarType carType = new CarType();
+        carType.setSeat(4);
+        carType.setName("The GOAT");
+        carType.setId(45);
+        whatIExpect.setCarType(carType);
+
+        Year year = new Year();
+        year.setName("Blue Note");
+        year.setId(10);
+
+        whatIExpect.setYear(year);
+
+        Design design = new Design();
+        design.setSeries(180);
+        design.setName("Number 1 Hit!");
+        design.setBrandId(1);
+        design.setId(1);
+        List<Design> dList = new ArrayList<>();
+        dList.add(design);
+
+        whatIExpect.setDesigns(dList);
+
+        // Act
+        BrandViewModel fromService = service.findBrand(1);
+
+        // Assert
+        assertEquals(whatIExpect, fromService);
+
+    }
+
+    @Test
+    public void shouldFindYear() {
+        Year expectedYear = new Year();
+        expectedYear.setId(10);
+        expectedYear.setName("Blue Note");
+
+        Year actualResult = service.findYear(10);
+
+        assertEquals(expectedYear, actualResult);
+    }
+
+    @Test
+    public void shouldReturnNullIfYearNotFound() {
+        Year actualResult = service.findYear(54321);
+
+        assertNull(actualResult);
+    }
+
+    @Test
+    public void shouldSaveYear() {
+        // Arrange
+        Year expectedOutput = new Year();
+        expectedOutput.setId(10);
+        expectedOutput.setName("Blue Note");
+
+        Year year = new Year();
+        year.setName("Blue Note");
+
+        // Act
+        Year actualOutput = service.saveYear(year);
+
+        // Assert
+        assertEquals(expectedOutput, actualOutput);
+    }
 
 }
